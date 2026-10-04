@@ -1,31 +1,34 @@
 <body>
   <h1>Welcome! to the Drawing Generator</h1>
-  <audio src="../public/button-click.mp3"></audio>
   <fieldset>
-  <legend>Select shape you want to generate:</legend>
+    <legend>Select shape you want to generate:</legend>
 
-  <div>
-    <input type="radio" id="dog" name="animal" value="dog" checked/>
-    <label for="dog">Dog</label>
-  </div>
+    <div>
+      <input type="radio" id="dog" name="animal" value="dog" checked />
+      <label for="dog">Dog</label>
+    </div>
 
-  <div>
-    <input type="radio" id="cat" name="animal" value="cat" />
-    <label for="cat">Cat</label>
-  </div>
+    <div>
+      <input type="radio" id="cat" name="animal" value="cat" />
+      <label for="cat">Cat</label>
+    </div>
 
-  <div>
-    <input type="radio" id="duck" name="animal" value="duck" />
-    <label for="duck">Duck</label>
-  </div>
-</fieldset>
+    <div>
+      <input type="radio" id="duck" name="animal" value="duck" />
+      <label for="duck">Duck</label>
+    </div>
+  </fieldset>
   <button class="audio-controller">Click me!</button>
+  <h2>Now let's creaet a canvas:</h2>
+  <canvas id="canvas" width="450" height="300">
+  </canvas>
   <style>
     body {
       background-color: dimgray;
       color: white;
       font-family: sans-serif;
     }
+
     button {
       padding: 6px 14px;
       border-radius: 4px;
@@ -33,18 +36,43 @@
       color: white;
       margin-top: 23px;
     }
+
+    canvas {
+      background-color: rgb(200, 200, 199);
+      border: 2px solid salmon;
+    }
   </style>
 
   <script>
+    const audioContext = new AudioContext();
 
-    const audio = document.querySelector("audio");
     const audioController = document.querySelector(".audio-controller");
-    
+
+    const canvas = document.getElementById("canvas");
+
+    const ctx = canvas.getContext("2d");
+
+    ctx.fillRect(30, 20, 50, 70);
+
+    ctx.clearRect(30, 30, 50, 50);
 
     audioController.addEventListener('click', () => {
-      audio.play();
-      
+      const oscillator = audioContext.createOscillator();
+      oscillator.frequency.value = 340;
+
+      oscillator.connect(audioContext.destination);
+      oscillator.start();
+
       const shapeInput = document.querySelector("input[name='animal']:checked");
+      new Promise((resolve, reject) => {
+        setTimeout(() => {
+          resolve();
+        }, 200);
+      }).then(() => {
+        oscillator.stop();
+      });
+
+
       console.log("value:", shapeInput?.value);
     })
   </script>
