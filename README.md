@@ -1,5 +1,11 @@
 # Drawing Showcase
 
+## IDK how to put Badges so
+- Canvas (drawn shapes on it)
+- Web Audio (created an audio of drawing creation which  sound on button click)
+- Interactive(input radio where you can choose one of those options)
+
+
 This project let's you see differnet drawings in canvas. Currently I've only two drawings "Dog" and "Cat" which you can select either of these  and draw it.
 
 ![project image](image.png)
