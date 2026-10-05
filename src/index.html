@@ -13,10 +13,7 @@
       <label for="cat">Cat</label>
     </div>
 
-    <div>
-      <input type="radio" id="duck" name="animal" value="duck" />
-      <label for="duck">Duck</label>
-    </div>
+
   </fieldset>
   <button class="audio-controller">Click me!</button>
   <h2>Now let's creaet a canvas:</h2>
@@ -52,11 +49,45 @@
 
     const ctx = canvas.getContext("2d");
 
+    function drawing() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'black'
+      ctx.moveTo(100, 100);
+      ctx.lineTo(100, 150);
+      ctx.lineTo(200, 150);
+      ctx.lineTo(200, 100);
+      ctx.lineTo(100, 100);
+      ctx.fill();
 
-    ctx.beginPath();
-    ctx.arc(100, 100, 40, (Math.PI/180) * 1, (Math.PI/180) * 300,)
-    ctx.
-    ctx.fill()
+      ctx.moveTo(75, 75);
+      ctx.arc(85, 85, 25, (Math.PI / 180) * 0, (Math.PI / 180) * 360)
+      ctx.fill();
+
+      ctx.moveTo(120, 150);
+      ctx.lineTo(120, 130);
+      ctx.lineTo(130, 200);
+      ctx.lineTo(120, 200);
+      ctx.lineTo(120, 1700);
+      ctx.fill();
+
+      ctx.moveTo(170, 150);
+      ctx.lineTo(170, 130);
+      ctx.lineTo(180, 200);
+      ctx.lineTo(170, 200);
+      ctx.lineTo(170, 150);
+      ctx.fill();
+
+
+      ctx.moveTo(200, 120);
+      ctx.lineTo(230, 120);
+      ctx.lineTo(230, 130);
+      ctx.lineTo(200, 130);
+      ctx.fill();
+    }
+
+    function generateArc(x, y, r, a1 = 0, a2 = 360) {
+      ctx.arc(x, y, r, (Math.PI / 180) * a1, (Math.PI / 180) * a2)
+    }
 
     audioController.addEventListener('click', () => {
       const oscillator = audioContext.createOscillator();
@@ -75,7 +106,39 @@
       });
 
 
-      console.log("value:", shapeInput?.value);
+
+      if (shapeInput?.value === 'dog') {
+
+        drawing();
+        ctx.fillStyle = "white";
+        ctx.beginPath()
+        generateArc(75, 80, 2)
+        ctx.fill();
+      }
+      else {
+        drawing();
+        ctx.moveTo(75, 60);
+        ctx.moveTo(75, 50);
+        ctx.lineTo(68, 70);
+        ctx.lineTo(80, 70);
+        ctx.fill()
+
+        ctx.moveTo(95, 50);
+        ctx.lineTo(88, 70);
+        ctx.lineTo(100, 70);
+        ctx.fill()
+
+        ctx.fillStyle = "white";
+        ctx.beginPath()
+        generateArc(75, 80, 2);
+        ctx.fill();
+        ctx.beginPath()
+        generateArc(90, 80, 2);
+        ctx.fill();
+        ctx.beginPath();
+        generateArc(82.5, 90, 4)
+        ctx.fill()
+      }
     })
   </script>
 </body>
